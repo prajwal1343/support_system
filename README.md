@@ -19,10 +19,6 @@ You may also see any lint errors in the console.
 
 # `UserLogin`
 
-User can signup page and login to website.
-[User Home Page]
-![alt text](./Assets/User.png)
-
 # `Admin Login`
 
 I will create one admin and provide all the credentials of the admins here.
@@ -30,13 +26,6 @@ I will create one admin and provide all the credentials of the admins here.
 ## "email": "admin@gmail.com",
 ## "password": "admin"
 
-If you go to the login page and log in with the admin credentials, you will access the admin page
-[Admin Home Page]
-![alt text](./Assets/Admin.png)
-
 # `Tech-Support Login`
 ## "email": "ganesh@gmail.com",
 ## "password": "0707"
-
-[tech-support Home Page]
-![alt text](./Assets/image.png)
