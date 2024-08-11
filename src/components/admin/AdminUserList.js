@@ -58,18 +58,6 @@ const AdminUserList = () => {
               )
             })
           }
-           { /*<td className="px-6 py-4 whitespace-nowrap">
-              <Link
-                to="/admin/user/123"
-                className="text-indigo-600 hover:text-indigo-900"
-              >
-                100000000000000
-              </Link>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">Balu Patil</td>
-            <td className="px-6 py-4 whitespace-nowrap">Balupatil@nnf</td>
-  */}
-         
          
         </tbody>
       </table>
