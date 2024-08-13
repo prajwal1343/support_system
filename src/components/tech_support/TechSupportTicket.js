@@ -20,18 +20,18 @@ function TechsupportTicket() {
   const handleOnChange = (e) => {
     setInput(e.target.value);
   };
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const resolvelTicket = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.put(`http://localhost:3001/tickits/${userTicketData?.id}`, {
+      const response = await axios.put(`${apiUrl+userTicketData?.id}`, {
         ...userTicketData,
         isResolved: true,
       });
       setUserTicketData(response?.data);
       setStatus(true);
 
-      const createCahat = await axios.post("http://localhost:3001/chats", {
+      const createCahat = await axios.post(`${apiUrl}chats`, {
         id: uid(11),
         ticketId: userTicketData?.id,
         userId: userTicketData?.userId,
@@ -46,7 +46,7 @@ function TechsupportTicket() {
   const getChatData = async () => {
     try {
       console.log("api chat");
-      const response = await axios.get("http://localhost:3001/chats", {
+      const response = await axios.get(`${apiUrl}chats`, {
         params: {
           techsupportId: currentUser.id,
           ticketId,
@@ -66,7 +66,7 @@ function TechsupportTicket() {
       getChatData();
       const time = new Date().getTime() + 330 * 60 * 1000;
       chatData?.messages?.push({ time, by: currentUser.type, message: input });
-      const response = await axios.put(`http://localhost:3001/chats/${chatData?.id}`, {
+      const response = await axios.put(`${apiUrl+chatData?.id}`, {
         ...chatData,
         messages: chatData.messages,
       });
@@ -77,7 +77,7 @@ function TechsupportTicket() {
 
   const getTicketData = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/tickits", {
+      const response = await axios.get(`${apiUrl}tickits`, {
         params: {
           techsupportId: currentUser.id,
           id: ticketId,

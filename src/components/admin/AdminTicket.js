@@ -19,7 +19,7 @@ function AdminTicket() {
   const [selectedTechSupportId, setSelectedTechSupportId] = useState("");
 
   const [input, setInput] = useState("");
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const handleOnChange = (e) => {
     setInput(e.target.value);
   };
@@ -31,7 +31,7 @@ function AdminTicket() {
       getChatData();
       const time = new Date().getTime() + 330 * 60 * 1000;
       chatData?.messages?.push({ time, by: currentUser.type, message: input });
-      const response = await axios.put(`http://localhost:3001/chats/${chatData?.id}`, {
+      const response = await axios.put(`${apiUrl+chatData?.id}`, {
         ...chatData,
         messages: chatData.messages,
       });
@@ -42,7 +42,7 @@ function AdminTicket() {
 
   const getChatData = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/chats", {
+      const response = await axios.get(`${apiUrl}chats`, {
         params: {
           ticketId,
         },
@@ -56,7 +56,7 @@ function AdminTicket() {
 
   const getTechSupportNames = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/tech-support");
+      const response = await axios.get(`${apiUrl}tech-support`);
       setTechSupportNames(response?.data);
     } catch (error) {
       console.log(error);
@@ -65,7 +65,7 @@ function AdminTicket() {
 
   const getTicketData = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/tickits", {
+      const response = await axios.get(`${apiUrl}tickits`, {
         params: {
           id: ticketId,
         },
@@ -86,7 +86,7 @@ function AdminTicket() {
   const AssignToTechSupport = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/tickits/${userTicketData?.id}`,
+        `${apiUrl+userTicketData?.id}`,
         {
           ...userTicketData,
           techsupportId: selectedTechSupportId,

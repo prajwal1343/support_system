@@ -15,6 +15,7 @@ const Signup = () => {
     e.preventDefault();
     setInput({ ...input, [e.target.id]: e.target.value });
   };
+  const apiUrl = process.env.REACT_APP_API_URL;
   const 
   onSubmitHandler = async (e) => {
     try {
@@ -25,7 +26,7 @@ const Signup = () => {
 
       if (!emailRegex.test(input?.email)) return setResponse("invalid email");
       const checkDuplicateEmail = await axios.get(
-        `http://localhost:3001/users?email=${input?.email}`
+        `${apiUrl}users?email=${input?.email}`
       );
       console.log(checkDuplicateEmail);
       if (checkDuplicateEmail?.data?.length > 0) return setResponse("email already exist");
@@ -34,8 +35,8 @@ const Signup = () => {
         return setResponse("password should have at least 4 characters");
       console.log(input);
       const id = uid(11);
-      await axios.post("http://localhost:3001/users", { ...input, id });
-      await axios.post("http://localhost:3001/login", {
+      await axios.post(`${apiUrl}users`, { ...input, id });
+      await axios.post(`${apiUrl}login`, {
         id,
         email: input.email,
         password: input.password,

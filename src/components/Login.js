@@ -5,8 +5,10 @@ import axios from "axios";
 import { signInSuccess } from './redux/slice/loginSlice.js'
 
 const Login = () => {
- const navigate =  useNavigate();
- const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -14,7 +16,8 @@ const Login = () => {
   const [response, setResponse] = useState("");
 
   const onChangeHandler = (e) => {
-    setInput({...input,
+    setInput({
+      ...input,
       [e.target.id]: e.target.value,
     });
   };
@@ -27,15 +30,15 @@ const Login = () => {
     if (!emailRegex.test(input?.email)) return setResponse("invalid email");
     if (input?.password?.trim()?.length < 4)
       return setResponse("password should have at least 4 characters");
-    const login = await axios.get("http://localhost:3001/login", {
+    const login = await axios.get(`${apiUrl}login`, {
       params: {
         email: input?.email,
         password: input?.password,
       },
     });
     // console.log(login.data);
-    if(login?.data?.length === 0)return setResponse("email or password is incorrect")
-    dispatch(signInSuccess({ id: login?.data[0]?.id, type: login?.data[0]?.type }))
+    if (login?.data?.length === 0) return setResponse("email or password is incorrect")
+    dispatch(signInSuccess({ id: login?.data[0]?.id, type: login?.data[0]?.type }))
     return navigate(`/${login?.data[0]?.type}`)
   };
 

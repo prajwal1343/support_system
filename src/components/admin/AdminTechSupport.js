@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 const AdminTechSupport = () => {
 
     const [techs, setTechs] = useState([]);
-
+    const apiUrl = process.env.REACT_APP_API_URL;
     const techSupportList = async () => {
-        const res = await axios.get("http://localhost:3001/tech-support");
+        const res = await axios.get(`${apiUrl}tech-support`);
         setTechs(res.data);
     }
 

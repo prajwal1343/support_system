@@ -25,13 +25,13 @@ function CreateTicket() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault();
 
       const id = uid(11);
-      const createticket = await axios.post(`http://localhost:3001/tickits`, {
+      const createticket = await axios.post(`${apiUrl}tickits`, {
         ...formData,
         id,
         image,

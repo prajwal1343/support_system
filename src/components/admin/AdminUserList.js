@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 const AdminUserList = () => {
   const [users, setUser] = useState([]);
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const userList = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/users");
+      const res = await axios.get(`${apiUrl}users`);
       setUser(res.data);
     } catch (error) {
       console.log(error);

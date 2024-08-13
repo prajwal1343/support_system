@@ -8,9 +8,9 @@ import { uid } from "uid";
 function Assigned() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [userTickets, setUserTickets] = useState([]);
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const getAllTickets = async () => {
-    const response = await axios.get("http://localhost:3001/tickits", {
+    const response = await axios.get(`${apiUrl}tickits`, {
       params: {
         techsupportId: currentUser.id,
       },
